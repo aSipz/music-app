@@ -71,7 +71,8 @@ export default function Sidebar() {
                 <Divider marginBottom='20px' color='gray.800' />
 
                 <Box
-                    height='66%'
+                    height='63%'
+                    marginBottom='20px'
                     overflowY='auto'
                     sx={{
                         '::-webkit-scrollbar': {
@@ -80,7 +81,7 @@ export default function Sidebar() {
                         },
                         '::-webkit-scrollbar-thumb': {
                             background: 'gray.500',
-                            'border-radius': '10px'
+                            borderRadius: '10px'
                         }
                     }}
                 >
