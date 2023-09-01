@@ -38,6 +38,8 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
+    "@types/cookie": "^0.5.1",
+    "@types/jsonwebtoken": "^9.0.2",
     "prettier": "^2.4.1",
     "prisma": "^3.6.0",
     "ts-node": "^10.4.0"
