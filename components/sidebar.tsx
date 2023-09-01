@@ -1,25 +1,9 @@
 import NextImage from 'next/image';
 import NextLink from 'next/link';
 import { Box, List, ListItem, ListIcon, Divider, Center, LinkBox, LinkOverlay } from '@chakra-ui/layout';
-import { MdHome, MdSearch, MdLibraryMusic, MdPlaylistAdd, MdFavorite } from 'react-icons/md';
+import { musicMenu, navMenu } from '@/utils/menus';
 
-const navMenu = [
-    {
-        name: 'Home',
-        icon: MdHome,
-        route: '/'
-    },
-    {
-        name: 'Search',
-        icon: MdSearch,
-        route: '/search'
-    },
-    {
-        name: 'My Library',
-        icon: MdLibraryMusic,
-        route: '/library'
-    },
-];
+const playlist = new Array(30).fill(1).map((_, i) => `Playlist ${i + 1}`);
 
 export default function Sidebar() {
     return (
@@ -30,7 +14,7 @@ export default function Sidebar() {
             paddingX='5px'
             color='gray'
         >
-            <Box paddingY='20px'>
+            <Box paddingY='20px' height='100%'>
                 <Box width='180px' marginBottom='20px' paddingX='20px'>
                     <NextLink href='/'>
                         <NextImage
@@ -63,8 +47,59 @@ export default function Sidebar() {
                     </List>
                 </Box>
 
-            </Box>
-            SIDEBAR
-        </Box>
+                <Box marginBottom='20px'>
+                    <List spacing={2}>
+                        {musicMenu.map(m => (
+                            <ListItem key={m.name} paddingX='20px' fontSize='16px'>
+                                <LinkBox>
+                                    <NextLink href={m.route} passHref>
+                                        <LinkOverlay>
+                                            <ListIcon
+                                                as={m.icon}
+                                                color='white'
+                                                marginRight='20px'
+                                            />
+                                            {m.name}
+                                        </LinkOverlay>
+                                    </NextLink>
+                                </LinkBox>
+                            </ListItem>
+                        ))}
+                    </List>
+                </Box >
+
+                <Divider marginBottom='20px' color='gray.800' />
+
+                <Box
+                    height='66%'
+                    overflowY='auto'
+                    sx={{
+                        '::-webkit-scrollbar': {
+                            bg: 'transparent',
+                            width: '10px'
+                        },
+                        '::-webkit-scrollbar-thumb': {
+                            background: 'gray.500',
+                            'border-radius': '10px'
+                        }
+                    }}
+                >
+                    <List spacing={2}>
+                        {playlist.map(p => (
+                            <ListItem paddingX='20px' key={p}>
+                                <LinkBox>
+                                    <NextLink href='/' passHref>
+                                        <LinkOverlay>
+                                            {p}
+                                        </LinkOverlay>
+                                    </NextLink>
+                                </LinkBox>
+                            </ListItem>
+                        ))}
+                    </List>
+                </Box>
+
+            </Box >
+        </Box >
     );
 }
