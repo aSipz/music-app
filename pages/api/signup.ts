@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 import prisma from '../../lib/prisma';
 import createCookie from '@/utils/createCookie';
+import signToken from '@/utils/signToken';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === 'POST') {
@@ -24,15 +24,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             return;
         }
 
-        const token = jwt.sign(
-            {
-                email: user.email,
-                id: user.id,
-                time: Date.now()
-            },
-            process.env.JWT_SECRET as jwt.Secret,
-            { expiresIn: '8h' }
-        );
+        const token = signToken(user.email, user.id);
 
         res.setHeader(
             'Set-Cookie',

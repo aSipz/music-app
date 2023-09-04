@@ -1,11 +1,14 @@
 import NextImage from 'next/image';
 import NextLink from 'next/link';
-import { Box, List, ListItem, ListIcon, Divider, Center, LinkBox, LinkOverlay } from '@chakra-ui/layout';
+import { Box, List, ListItem, ListIcon, Divider, LinkBox } from '@chakra-ui/react';
 import { musicMenu, navMenu } from '@/utils/menus';
+import { usePlaylist } from '@/lib/hooks';
 
-const playlist = new Array(30).fill(1).map((_, i) => `Playlist ${i + 1}`);
+// const playlist = new Array(30).fill(1).map((_, i) => `Playlist ${i + 1}`);
 
 export default function Sidebar() {
+    const { playlists, isLoading, error } = usePlaylist();
+
     return (
         <Box
             width='100%'
@@ -32,14 +35,12 @@ export default function Sidebar() {
                             <ListItem key={m.name} paddingX='20px' fontSize='16px'>
                                 <LinkBox>
                                     <NextLink href={m.route} passHref>
-                                        <LinkOverlay>
-                                            <ListIcon
-                                                as={m.icon}
-                                                color='white'
-                                                marginRight='20px'
-                                            />
-                                            {m.name}
-                                        </LinkOverlay>
+                                        <ListIcon
+                                            as={m.icon}
+                                            color='white'
+                                            marginRight='20px'
+                                        />
+                                        {m.name}
                                     </NextLink>
                                 </LinkBox>
                             </ListItem>
@@ -53,14 +54,12 @@ export default function Sidebar() {
                             <ListItem key={m.name} paddingX='20px' fontSize='16px'>
                                 <LinkBox>
                                     <NextLink href={m.route} passHref>
-                                        <LinkOverlay>
-                                            <ListIcon
-                                                as={m.icon}
-                                                color='white'
-                                                marginRight='20px'
-                                            />
-                                            {m.name}
-                                        </LinkOverlay>
+                                        <ListIcon
+                                            as={m.icon}
+                                            color='white'
+                                            marginRight='20px'
+                                        />
+                                        {m.name}
                                     </NextLink>
                                 </LinkBox>
                             </ListItem>
@@ -86,13 +85,11 @@ export default function Sidebar() {
                     }}
                 >
                     <List spacing={2}>
-                        {playlist.map(p => (
-                            <ListItem paddingX='20px' key={p}>
+                        {playlists && playlists.map(p => (
+                            <ListItem paddingX='20px' key={p.id}>
                                 <LinkBox>
                                     <NextLink href='/' passHref>
-                                        <LinkOverlay>
-                                            {p}
-                                        </LinkOverlay>
+                                        {p.name}
                                     </NextLink>
                                 </LinkBox>
                             </ListItem>
