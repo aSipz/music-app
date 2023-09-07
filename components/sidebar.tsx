@@ -4,8 +4,6 @@ import { Box, List, ListItem, ListIcon, Divider, LinkBox } from '@chakra-ui/reac
 import { musicMenu, navMenu } from '@/utils/menus';
 import { usePlaylist } from '@/lib/hooks';
 
-// const playlist = new Array(30).fill(1).map((_, i) => `Playlist ${i + 1}`);
-
 export default function Sidebar() {
     const { playlists, isLoading, error } = usePlaylist();
 
