@@ -15,7 +15,6 @@ export default function validateRoute(handler: CustomNextApiHandler) {
                 const { id }: any = jwt.verify(token, process.env.JWT_SECRET as jwt.Secret);
 
                 user = await prisma.user.findUnique({ where: { id } });
-                user = {}
 
                 if (!user) {
                     throw new Error('No such user');
@@ -33,3 +32,8 @@ export default function validateRoute(handler: CustomNextApiHandler) {
         res.json({ error: 'Not Authorized' });
     }
 };
+
+export function validateToken(token: string) {
+    const { id }: any = jwt.verify(token, process.env.JWT_SECRET as jwt.Secret);
+    return id;
+}

@@ -17,6 +17,9 @@ model User {
   updatedAt DateTime   @updatedAt
   email     String     @unique
   password  String
+  firstName String
+  lastName  String
+  image     String     @default("https://static.vecteezy.com/system/resources/previews/002/275/847/original/male-avatar-profile-icon-of-smiling-caucasian-man-vector.jpg")
   playlists Playlist[]
 }
 

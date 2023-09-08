@@ -86,7 +86,10 @@ export default function Sidebar() {
                         {playlists && playlists.map(p => (
                             <ListItem paddingX='20px' key={p.id}>
                                 <LinkBox>
-                                    <NextLink href='/' passHref>
+                                    <NextLink href={{
+                                        pathname: '/playlist/[id]',
+                                        query: { id: p.id }
+                                    }} passHref>
                                         {p.name}
                                     </NextLink>
                                 </LinkBox>

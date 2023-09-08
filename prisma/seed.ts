@@ -28,7 +28,10 @@ const run = async () => {
         update: {},
         create: {
             email: 'user@test.com',
-            password: bcrypt.hashSync('password', salt)
+            password: bcrypt.hashSync('password', salt),
+            firstName: 'Angel',
+            lastName: 'Ivanov',
+            image: 'https://static.vecteezy.com/system/resources/previews/002/275/847/original/male-avatar-profile-icon-of-smiling-caucasian-man-vector.jpg',
         }
     });
 
