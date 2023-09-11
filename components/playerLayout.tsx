@@ -1,6 +1,7 @@
 import { Box } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 import Sidebar from './sidebar';
+import PlayerBar from './playerBar';
 
 export default function PlayerLayout({ children }: { children: ReactNode | ReactNode[] }) {
     return (
@@ -14,7 +15,7 @@ export default function PlayerLayout({ children }: { children: ReactNode | React
                 </Box>
             </Box>
             <Box position='absolute' bottom='0' left='0'>
-                PLAYER
+                <PlayerBar />
             </Box>
         </Box>
     );
