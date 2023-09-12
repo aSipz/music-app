@@ -10,3 +10,10 @@ export const store = createStore({
         state.activeSong = payload;
     }),
 });
+
+export type Store = {
+    activeSongs: [];
+    activeSong: null;
+    changeActiveSongs: typeof action;
+    changeActiveSong: typeof action;
+}

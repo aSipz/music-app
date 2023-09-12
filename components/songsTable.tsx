@@ -2,20 +2,29 @@ import { Box, Table, Thead, Td, Tr, Th, Tbody, IconButton } from '@chakra-ui/rea
 import { BsFillPlayFill } from 'react-icons/bs';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { formatDate, formatTime } from '@/utils/formatters';
+import { useStoreActions } from 'easy-peasy';
+import { Store } from '@/lib/store';
 
-export default function SongsTable({ songs }: {
-    songs: {
-        id: number;
-        createdAt: Date;
-        updatedAt: Date;
-        name: string;
-        duration: number;
-        url: string;
-        artist: any;
-        artistId: number;
-        playlist: any
-    }[]
-}) {
+export type Song = {
+    id: number;
+    createdAt: Date;
+    updatedAt: Date;
+    name: string;
+    duration: number;
+    url: string;
+    artist: any;
+    artistId: number;
+    playlist: any
+};
+
+export default function SongsTable({ songs }: { songs: Song[] }) {
+    const playSongs = useStoreActions((store: Store) => store.changeActiveSongs);
+    const setActiveSong = useStoreActions((store: Store) => store.changeActiveSong);
+
+    const handlePlay = (activeSong?: any) => {
+        setActiveSong(activeSong || songs[0]);
+        playSongs(songs as any);
+    };
 
     return (
         <Box bg='transparent' color='white'>
@@ -26,6 +35,7 @@ export default function SongsTable({ songs }: {
                     size='lg'
                     isRound
                     aria-label='play'
+                    onClick={() => handlePlay()}
                 />
             </Box>
             <Table variant='unstyled'>
@@ -50,6 +60,7 @@ export default function SongsTable({ songs }: {
                             }}
                             key={s.id}
                             cursor='pointer'
+                            onClick={() => handlePlay(s)}
                         >
                             <Td>{i + 1}</Td>
                             <Td>{s.name}</Td>
